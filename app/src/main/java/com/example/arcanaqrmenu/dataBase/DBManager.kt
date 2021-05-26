@@ -15,7 +15,6 @@ class DBManager {
     fun checkLogin(email: String, password: String): Boolean {
         try {
             mAuth.signInWithEmailAndPassword(email.trim(),password.trim()).addOnCompleteListener { task ->
-
                 if (task.isSuccessful){
                     CURRENT_USER = User(mAuth.currentUser!!.uid,mAuth.currentUser!!.email.toString().trim(),password.trim())
                 }
