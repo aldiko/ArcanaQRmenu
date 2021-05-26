@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/restoranFragment"
+        android:title="@string/restoran_bottom_menu_title"
+        android:icon="@drawable/ic_baseline_home_24"
+        />
+    <item
+        android:id="@+id/qrFragment"
+        android:title="@string/order_bottom_menu_title"
+        android:icon="@drawable/ic_baseline_qr_code_24"
+        />
+    <item
+        android:id="@+id/profileFragment"
+        android:title="@string/profile_bottom_menu_title"
+        android:icon="@drawable/ic_baseline_account_circle_24"/>
 </menu>

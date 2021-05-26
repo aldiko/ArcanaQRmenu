@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/qrFragment">
 
+    <fragment
+        android:id="@+id/qrFragment"
+        android:name="com.example.arcanaqrmenu.views.fragments.QrFragment"
+        android:label="fragment_qr"
+        tools:layout="@layout/fragment_qr" />
+    <fragment
+        android:id="@+id/restoranFragment"
+        android:name="com.example.arcanaqrmenu.views.fragments.RestoranFragment"
+        android:label="fragment_restoran"
+        tools:layout="@layout/fragment_restoran" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.arcanaqrmenu.views.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/loginFragment2"
+        android:name="com.example.arcanaqrmenu.views.fragments.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/registrationFragment2"
+        android:name="com.example.arcanaqrmenu.views.fragments.RegistrationFragment"
+        android:label="RegistrationFragment" />
 </navigation>
