@@ -1,19 +1,19 @@
 package com.example.arcanaqrmenu.interfaces
 
-import com.example.arcanaqrmenu.models.User
-
-interface ILogin {
+interface IRegistration {
 
     interface View {
         fun startAlertLoading()
         fun stopAlertLoading()
         fun showMessage(stringId: Int)
         fun clearFields()
-        fun startNextFragment(user : User)
+        fun startNextFragment()
     }
 
     interface Presenter {
-        fun checkLogin(email: String, password: String)
+        fun register(email: String, password: String, confirmPassword: String)
         fun cleanUp()
     }
+
+
 }

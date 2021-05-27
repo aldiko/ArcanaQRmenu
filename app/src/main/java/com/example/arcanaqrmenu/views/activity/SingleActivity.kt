@@ -27,6 +27,15 @@ class SingleActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(bottomNav,navController)
         //NavigationUI.setupActionBarWithNavController(this,navController)
 
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.qrFragment -> showBottomNav()
+                R.id.profileFragment -> showBottomNav()
+                R.id.restoranFragment -> showBottomNav()
+                else -> hideBottomNav()
+            }
+        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

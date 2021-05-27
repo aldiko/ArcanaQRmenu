@@ -1,50 +1,56 @@
 package com.example.arcanaqrmenu.dataBase
 
+import android.util.Log
 import com.example.arcanaqrmenu.models.User
 import com.google.firebase.auth.FirebaseAuth
 
+
 class DBManager {
-    private lateinit var mAuth: FirebaseAuth
 
     companion object {
+        var mAuth = FirebaseAuth.getInstance()
         var CURRENT_USER: User? = null
     }
 
+    interface UserCallback {
+        fun isLoginSuccess(exist: User?)
+    }
+
+
+    interface UserExistCallback {
+        fun isUserExist(exist: Boolean)
+    }
 
     //возможно стоит поменять тип возвращаемых данных с Bolean на FirebaseUser
-    fun checkLogin(email: String, password: String): Boolean {
+    fun checkLogin(email: String, password: String, check: UserCallback) {
         try {
-            mAuth.signInWithEmailAndPassword(email.trim(),password.trim()).addOnCompleteListener { task ->
-                if (task.isSuccessful){
-                    CURRENT_USER = User(mAuth.currentUser!!.uid,mAuth.currentUser!!.email.toString().trim(),password.trim())
+            mAuth.signInWithEmailAndPassword(email.trim(), password.trim())
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        check.isLoginSuccess(User(mAuth.currentUser!!.uid, email, password))
+                    } else {
+                        check.isLoginSuccess(null)
+                    }
                 }
-            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return CURRENT_USER != null
     }
 
-    fun checkEmailIsUnique(email: String): Boolean {
-        var check = false
+    fun checkEmailIsUnique(email: String, check: UserExistCallback) {
         mAuth.fetchSignInMethodsForEmail(email.trim()).addOnCompleteListener { task ->
-            if (task.result?.signInMethods?.size == 0){
-                check = true
-            }
+            val add = task.result?.signInMethods?.size == 0
+            check.isUserExist(add)
         }
-        return check
+
     }
+
 
     fun addUser(email: String, password: String) {
-        if (checkEmailIsUnique(email)) {
-            mAuth.createUserWithEmailAndPassword(email.trim(), password.trim())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-
-                    } else {
-
-                    }
-                }
-        }
+        mAuth.createUserWithEmailAndPassword(email.trim(), password.trim())
+            .addOnCompleteListener { task ->
+            }
     }
+
+
 }
