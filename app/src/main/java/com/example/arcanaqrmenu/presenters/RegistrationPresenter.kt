@@ -16,20 +16,28 @@ class RegistrationPresenter(private val view: IRegistration.View): IRegistration
         view.startAlertLoading()
         job = GlobalScope.launch(Dispatchers.IO) {
             if (emailValidation(email)) {
-                if (passwordValidation(password,confirmPassword)) {
-                    dbManager.checkEmailIsUnique(email,object : DBManager.UserExistCallback {
-                        override fun isUserExist(exist: Boolean) {
-                            view.stopAlertLoading()
-                            if(exist) {
-                                dbManager.addUser(email,password)
-                                view.startNextFragment()
-                            }else {
-                                view.showMessage(R.string.email_already_exists)
-                                view.clearFields()
-                            }
+                if (passwordValidation(password)) {
+                   if (checkPasswords(password, confirmPassword)) {
+                       dbManager.checkEmailIsUnique(email,object : DBManager.UserExistCallback {
+                           override fun isUserExist(exist: Boolean) {
+                               view.stopAlertLoading()
+                               if(exist) {
+                                   dbManager.addUser(email,password)
+                                   view.startNextFragment()
+                               }else {
+                                   view.showMessage(R.string.email_already_exists)
+                                   view.clearFields()
+                               }
 
-                        }
-                    })
+                           }
+                       })
+                   } else {
+                       withContext(Dispatchers.Main) {
+                           view.stopAlertLoading()
+                           view.clearFields()
+                           view.showMessage(R.string.password_mismatch)
+                       }
+                   }
                 } else {
                     withContext(Dispatchers.Main) {
                         view.stopAlertLoading()
@@ -49,7 +57,9 @@ class RegistrationPresenter(private val view: IRegistration.View): IRegistration
 
     private fun emailValidation(email: String): Boolean = email.contains("@") && email.contains(".")
 
-    private fun passwordValidation(password: String, confirmPassword: String): Boolean = password.length > 7 && password == confirmPassword
+    private fun passwordValidation(password: String): Boolean = password.length > 7
+
+    private fun checkPasswords(password: String, confirmPassword: String): Boolean = password == confirmPassword
 
     override fun cleanUp() {
         job?.cancel()

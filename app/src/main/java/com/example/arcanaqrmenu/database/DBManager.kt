@@ -42,7 +42,6 @@ class DBManager {
             val add = task.result?.signInMethods?.size == 0
             check.isUserExist(add)
         }
-
     }
 
 

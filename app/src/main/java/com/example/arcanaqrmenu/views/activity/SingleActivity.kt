@@ -20,12 +20,11 @@ class SingleActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //supportActionBar?.hide()
+        supportActionBar?.hide()
 
         setContentView(R.layout.single__activity)
         navController = findNavController(R.id.nav_host_fragment)
         NavigationUI.setupWithNavController(bottomNav,navController)
-        //NavigationUI.setupActionBarWithNavController(this,navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {

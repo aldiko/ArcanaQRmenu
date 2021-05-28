@@ -24,7 +24,7 @@ class RegistrationFragment : Fragment(), IRegistration.View {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,7 +49,7 @@ class RegistrationFragment : Fragment(), IRegistration.View {
                 )
             }
         }
-        goLogin.setOnClickListener {
+        backImageButton.setOnClickListener {
             findNavController().navigate(R.id.loginFragment2)
         }
     }

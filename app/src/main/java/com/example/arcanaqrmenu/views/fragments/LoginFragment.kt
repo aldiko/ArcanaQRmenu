@@ -1,6 +1,7 @@
 package com.example.arcanaqrmenu.views.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,10 +14,8 @@ import com.example.arcanaqrmenu.R
 import com.example.arcanaqrmenu.interfaces.ILogin
 import com.example.arcanaqrmenu.models.User
 import com.example.arcanaqrmenu.presenters.LoginPresenter
-import com.example.arcanaqrmenu.presenters.RegistrationPresenter
 import com.example.arcanaqrmenu.views.alerts.LoadingAlert
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_registration.*
 
 
 class LoginFragment : Fragment(), ILogin.View {
@@ -27,10 +26,7 @@ class LoginFragment : Fragment(), ILogin.View {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_login, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,7 +66,7 @@ class LoginFragment : Fragment(), ILogin.View {
     }
 
     override fun startNextFragment(user: User) {
-        prefs.edit().putString("user_uid", user.id.toString()).apply()
+        prefs.edit().putString("user_uid", user.id).apply()
         findNavController().navigate(R.id.qrFragment)
     }
 

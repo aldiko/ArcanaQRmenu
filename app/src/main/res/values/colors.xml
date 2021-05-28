@@ -10,4 +10,6 @@
     <color name="brown">#C9C0C0</color>
     <color name="brown_800">#878080</color>
     <color name="brown_900">#B0A9A9</color>
+    <color name="grey">#C4C4C4</color>
+    <color name="silver">#A3A3A3</color>
 </resources>

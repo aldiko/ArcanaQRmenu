@@ -15,4 +15,13 @@
     <string name="password_hint">Пароль</string>
     <string name="repeat_password_hint">Повторите пароль</string>
     <string name="register_btn_text">Зарегистрироваться</string>
+    <string name="email">Почта</string>
+    <string name="password">Пароль</string>
+    <string name="login">Войти</string>
+    <string name="registration">Регистрация</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="confirm_password">Повторите пароль</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="password_mismatch">Пароли не совпадают</string>
+    <string name="scan_qr">Сканировать QR</string>
 </resources>
